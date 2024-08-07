@@ -30,19 +30,16 @@ def add_to_summary(item, category):
             else:
                 menu_item['Quantity'] = 1
                 st.session_state.summary.append(menu_item)
-    st.experimental_rerun()
 
 # Function to remove item from summary
 def remove_from_summary(item):
     st.session_state.summary = [i for i in st.session_state.summary if i['Item'] != item]
-    st.experimental_rerun()
 
 # Function to increase item quantity in summary
 def increase_quantity(item):
     for i in st.session_state.summary:
         if i['Item'] == item:
             i['Quantity'] += 1
-    st.experimental_rerun()
 
 # Function to decrease item quantity in summary
 def decrease_quantity(item):
@@ -52,7 +49,6 @@ def decrease_quantity(item):
                 i['Quantity'] -= 1
             else:
                 remove_from_summary(item)
-    st.experimental_rerun()
 
 # Main application
 st.sidebar.title("Restaurant Management System")
@@ -85,6 +81,7 @@ if st.session_state.summary:
     selected_remove_item = st.selectbox("Select Item to Remove", remove_item_options)
     if st.button("Remove"):
         remove_from_summary(selected_remove_item)
+        st.experimental_rerun()
 
     # Increase/decrease item quantity
     st.title("Update Quantity")
@@ -92,8 +89,10 @@ if st.session_state.summary:
     selected_update_item = st.selectbox("Select Item to Update", update_item_options)
     if st.button("Increase"):
         increase_quantity(selected_update_item)
+        st.experimental_rerun()
     if st.button("Decrease"):
         decrease_quantity(selected_update_item)
+        st.experimental_rerun()
 
     # Estimate amount
     estimate_amount = sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
@@ -103,5 +102,6 @@ if st.session_state.summary:
     if st.button("Place Order"):
         st.write("Order placed successfully!")
         st.session_state.summary = []
+        st.experimental_rerun()
 else:
     st.write("No items in summary.")
