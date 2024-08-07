@@ -8,8 +8,8 @@ if 'menu' not in st.session_state:
         'Chinese': [{'Item': 'Veg Fried Rice', 'Price': 120}, {'Item': 'Chicken Fried Rice', 'Price': 150}],
         'North Indian': [{'Item': 'Chana Masala', 'Price': 100}, {'Item': 'Palak Paneer', 'Price': 120}],
         'Sweets': [{'Item': 'Gulab Jamun', 'Price': 80}, {'Item': 'Jalebi', 'Price': 90}],
-        'South Indian': [{'Item': 'Idli', 'Price': 60}, {'Item': 'Dosa', 'Price': 84}],
-        'Snacks': [{'Item': 'Samosa', 'Price': 32}, {'Item': 'Pakora', 'Price': 60}]
+        'South Indian': [{'Item': 'Idli', 'Price': 60}, {'Item': 'Dosa', 'Price': 80}],
+        'Snacks': [{'Item': 'Samosa', 'Price': 50}, {'Item': 'Pakora', 'Price': 60}]
     }
 
 if 'summary' not in st.session_state:
@@ -25,7 +25,7 @@ def add_to_summary(item, category):
     for menu_item in st.session_state.menu[category]:
         if menu_item['Item'] == item:
             st.session_state.summary.append(menu_item)
-            st.experimental_rerun()
+    st.experimental_rerun()
 
 # Main application
 st.sidebar.title("Restaurant Management System")
