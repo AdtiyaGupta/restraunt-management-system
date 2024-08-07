@@ -29,7 +29,7 @@ def add_to_summary(item, category):
                 existing_item['Quantity'] += 1
             else:
                 menu_item['Quantity'] = 1
-                st.session_state.summary.append(menu_item)
+                st.session_state.summary.append(menu_item.copy())  # Create a copy of the menu item
 
 # Function to remove item from summary
 def remove_from_summary(item):
