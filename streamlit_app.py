@@ -74,31 +74,34 @@ if st.button("Add to Summary"):
 
 # Summary
 st.title("Summary")
-summary_df = pd.DataFrame(st.session_state.summary)
-summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
-st.write(summary_df)
+if st.session_state.summary:
+    summary_df = pd.DataFrame(st.session_state.summary)
+    summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
+    st.write(summary_df)
 
-# Remove item from summary
-st.title("Remove Item")
-remove_item_options = [item['Item'] for item in st.session_state.summary]
-selected_remove_item = st.selectbox("Select Item to Remove", remove_item_options)
-if st.button("Remove"):
-    remove_from_summary(selected_remove_item)
+    # Remove item from summary
+    st.title("Remove Item")
+    remove_item_options = [item['Item'] for item in st.session_state.summary]
+    selected_remove_item = st.selectbox("Select Item to Remove", remove_item_options)
+    if st.button("Remove"):
+        remove_from_summary(selected_remove_item)
 
-# Increase/decrease item quantity
-st.title("Update Quantity")
-update_item_options = [item['Item'] for item in st.session_state.summary]
-selected_update_item = st.selectbox("Select Item to Update", update_item_options)
-if st.button("Increase"):
-    increase_quantity(selected_update_item)
-if st.button("Decrease"):
-    decrease_quantity(selected_update_item)
+    # Increase/decrease item quantity
+    st.title("Update Quantity")
+    update_item_options = [item['Item'] for item in st.session_state.summary]
+    selected_update_item = st.selectbox("Select Item to Update", update_item_options)
+    if st.button("Increase"):
+        increase_quantity(selected_update_item)
+    if st.button("Decrease"):
+        decrease_quantity(selected_update_item)
 
-# Estimate amount
-estimate_amount = sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
-st.write(f"Estimated Amount: ₹{estimate_amount:.2f}")
+    # Estimate amount
+    estimate_amount = sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
+    st.write(f"Estimated Amount: ₹{estimate_amount:.2f}")
 
-# Place order
-if st.button("Place Order"):
-    st.write("Order placed successfully!")
-    st.session_state.summary = []
+    # Place order
+    if st.button("Place Order"):
+        st.write("Order placed successfully!")
+        st.session_state.summary = []
+else:
+    st.write("No items in summary.")
