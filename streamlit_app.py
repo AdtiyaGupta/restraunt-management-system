@@ -24,7 +24,34 @@ def view_menu(category):
 def add_to_summary(item, category):
     for menu_item in st.session_state.menu[category]:
         if menu_item['Item'] == item:
-            st.session_state.summary.append(menu_item)
+            existing_item = next((i for i in st.session_state.summary if i['Item'] == item), None)
+            if existing_item:
+                existing_item['Quantity'] += 1
+            else:
+                menu_item['Quantity'] = 1
+                st.session_state.summary.append(menu_item)
+    st.experimental_rerun()
+
+# Function to remove item from summary
+def remove_from_summary(item):
+    st.session_state.summary = [i for i in st.session_state.summary if i['Item'] != item]
+    st.experimental_rerun()
+
+# Function to increase item quantity in summary
+def increase_quantity(item):
+    for i in st.session_state.summary:
+        if i['Item'] == item:
+            i['Quantity'] += 1
+    st.experimental_rerun()
+
+# Function to decrease item quantity in summary
+def decrease_quantity(item):
+    for i in st.session_state.summary:
+        if i['Item'] == item:
+            if i['Quantity'] > 1:
+                i['Quantity'] -= 1
+            else:
+                remove_from_summary(item)
     st.experimental_rerun()
 
 # Main application
@@ -48,10 +75,27 @@ if st.button("Add to Summary"):
 # Summary
 st.title("Summary")
 summary_df = pd.DataFrame(st.session_state.summary)
+summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
 st.write(summary_df)
 
+# Remove item from summary
+st.title("Remove Item")
+remove_item_options = [item['Item'] for item in st.session_state.summary]
+selected_remove_item = st.selectbox("Select Item to Remove", remove_item_options)
+if st.button("Remove"):
+    remove_from_summary(selected_remove_item)
+
+# Increase/decrease item quantity
+st.title("Update Quantity")
+update_item_options = [item['Item'] for item in st.session_state.summary]
+selected_update_item = st.selectbox("Select Item to Update", update_item_options)
+if st.button("Increase"):
+    increase_quantity(selected_update_item)
+if st.button("Decrease"):
+    decrease_quantity(selected_update_item)
+
 # Estimate amount
-estimate_amount = sum([item['Price'] for item in st.session_state.summary])
+estimate_amount = sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
 st.write(f"Estimated Amount: ₹{estimate_amount:.2f}")
 
 # Place order
