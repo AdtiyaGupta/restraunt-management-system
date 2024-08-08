@@ -17,11 +17,13 @@ if 'summary' not in st.session_state:
 
 # Function to view menu
 def view_menu(category):
+    """Display menu items for a given category"""
     menu_df = pd.DataFrame(st.session_state.menu[category], columns=['Item', 'Price'])
     st.write(menu_df)
 
 # Function to add item to summary
 def add_to_summary(item, category):
+    """Add an item to the summary"""
     for menu_item in st.session_state.menu[category]:
         if menu_item['Item'] == item:
             existing_item = next((i for i in st.session_state.summary if i['Item'] == item), None)
@@ -33,22 +35,30 @@ def add_to_summary(item, category):
 
 # Function to remove item from summary
 def remove_from_summary(item):
+    """Remove an item from the summary"""
     st.session_state.summary = [i for i in st.session_state.summary if i['Item'] != item]
 
 # Function to increase item quantity in summary
 def increase_quantity(item):
+    """Increase the quantity of an item in the summary"""
     for i in st.session_state.summary:
         if i['Item'] == item:
             i['Quantity'] += 1
 
 # Function to decrease item quantity in summary
 def decrease_quantity(item):
+    """Decrease the quantity of an item in the summary"""
     for i in st.session_state.summary:
         if i['Item'] == item:
             if i['Quantity'] > 1:
                 i['Quantity'] -= 1
             else:
                 remove_from_summary(item)
+
+# Function to estimate total amount
+def estimate_amount():
+    """Calculate the estimated total amount"""
+    return sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
 
 # Main application
 st.sidebar.title("Restaurant Management System")
@@ -92,11 +102,11 @@ if st.session_state.summary:
         decrease_quantity(selected_update_item)
 
     # Estimate amount
-    estimate_amount = sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
-    st.write(f"Estimated Amount: ₹{estimate_amount:.2f}")
+    estimated_amount = estimate_amount()
+    st.write(f"Estimated Amount: ₹{estimated_amount:.2f}")
 
     # Place order
     if st.button("Place Order"):
         st.write("Order placed successfully!")
 
-st.experimental_rerun()  # Move st.experimental_rerun() to the end of the script
+st.experimental_rerun()  # Move st.experimental
