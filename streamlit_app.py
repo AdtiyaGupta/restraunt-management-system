@@ -67,6 +67,7 @@ item_options = [item['Item'] for item in item_list]
 selected_item = st.selectbox("Select Item", item_options)
 if st.button("Add to Summary"):
     add_to_summary(selected_item, selected_menu)
+    st.experimental_rerun()
 
 # Summary
 st.title("Summary")
@@ -89,9 +90,15 @@ if st.session_state.summary:
     selected_update_item = st.selectbox("Select Item to Update", update_item_options)
     if st.button("Increase"):
         increase_quantity(selected_update_item)
+        summary_df = pd.DataFrame(st.session_state.summary)
+        summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
+        st.write(summary_df)
         st.experimental_rerun()
     if st.button("Decrease"):
         decrease_quantity(selected_update_item)
+        summary_df = pd.DataFrame(st.session_state.summary)
+        summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
+        st.write(summary_df)
         st.experimental_rerun()
 
     # Estimate amount
