@@ -67,7 +67,8 @@ item_options = [item['Item'] for item in item_list]
 selected_item = st.selectbox("Select Item", item_options)
 if st.button("Add to Summary"):
     add_to_summary(selected_item, selected_menu)
-    st.experimental_rerun()
+    st.cache.clear()  # Clear the cache
+    st.script_runner.rerun()  # Rerun the script
 
 # Summary
 st.title("Summary")
@@ -82,7 +83,8 @@ if st.session_state.summary:
     selected_remove_item = st.selectbox("Select Item to Remove", remove_item_options)
     if st.button("Remove"):
         remove_from_summary(selected_remove_item)
-        st.experimental_rerun()
+        st.cache.clear()  # Clear the cache
+        st.script_runner.rerun()  # Rerun the script
 
     # Increase/decrease item quantity
     st.title("Update Quantity")
@@ -93,22 +95,9 @@ if st.session_state.summary:
         summary_df = pd.DataFrame(st.session_state.summary)
         summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
         st.write(summary_df)
-        st.experimental_rerun()
+        st.cache.clear()  # Clear the cache
+        st.script_runner.rerun()  # Rerun the script
     if st.button("Decrease"):
         decrease_quantity(selected_update_item)
         summary_df = pd.DataFrame(st.session_state.summary)
-        summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis=1)
-        st.write(summary_df)
-        st.experimental_rerun()
-
-    # Estimate amount
-    estimate_amount = sum([item['Price'] * item['Quantity'] for item in st.session_state.summary])
-    st.write(f"Estimated Amount: ₹{estimate_amount:.2f}")
-
-    # Place order
-    if st.button("Place Order"):
-        st.write("Order placed successfully!")
-        st.session_state.summary = []
-        st.experimental_rerun()
-else:
-    st.write("No items in summary.")
+        summary_df['Total'] = summary_df.apply(lambda row: row['Price'] * row['Quantity'], axis
