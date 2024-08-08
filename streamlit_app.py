@@ -108,5 +108,4 @@ if st.session_state.summary:
     # Place order
     if st.button("Place Order"):
         st.write("Order placed successfully!")
-
-st.experimental_rerun()
+        st.session_state.summary = []  # Clear the summary after placing the
