@@ -109,4 +109,4 @@ if st.session_state.summary:
     if st.button("Place Order"):
         st.write("Order placed successfully!")
 
-st.experimental_rerun()  # Move st.experimental
+st.experimental_rerun()
