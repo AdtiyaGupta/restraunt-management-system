@@ -20,7 +20,7 @@ def view_menu(category):
     """Display menu items for a given category"""
     menu_df = pd.DataFrame(st.session_state.menu[category], columns=['Item', 'Price'])
     cols = st.columns(3)
-    for i, row in menu_df.head(9).iterrows():
+    for i, row in menu_df.head().iterrows():
         with cols[i % 3]:
             st.write(f"{row['Item']} - ₹{row['Price']}")
 
