@@ -19,11 +19,18 @@ if 'summary' not in st.session_state:
 def view_menu(category):
     """Display menu items for a given category"""
     menu_df = pd.DataFrame(st.session_state.menu[category], columns=['Item', 'Price'])
-    cols = st.columns(3)
-    for i, row in menu_df.head().iterrows():
-        with cols[i % 3]:
+    num_cols = 3
+    num_rows_per_col = 10
+    cols = st.columns(num_cols)
+    for i, row in menu_df.iterrows():
+        col_idx = i % num_cols
+        row_idx = i // num_cols
+        if row_idx >= num_rows_per_col:
+            break
+        with cols[col_idx]:
             st.write(f"{row['Item']} - ₹{row['Price']}")
-
+    
+   
 # Function to add item to summary
 def add_to_summary(item, category):
     """Add an item to the summary"""
