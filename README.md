@@ -1,13 +1,9 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
-
-Description of the app ...
+## RESTURANT MANAGEMENT SYSTEM
+so this is a smarter way of making a resturant more efficient and makes order management much faster and a easy to make orders.  
 
 ## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://restraunt-management-system.streamlit.app/)
 
 ## GitHub Codespaces
 
