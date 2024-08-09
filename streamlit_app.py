@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 
 # Set the background image
-page_bg_img = """
+page_bg_img =
 <style>
 body {
 background-image: url("https://cdn.dribbble.com/users/215/screenshots/1410960/attachments/205781/1_-_Underdark.png");
 background-size: cover;
 }
 </style>
-"""
+
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
