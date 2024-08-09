@@ -4,7 +4,7 @@ import pandas as pd
 # Initialize data
 if 'menu' not in st.session_state:
     st.session_state.menu = {
-        'Beverages': [{'Item': 'Cold Coffee', 'Price': 84}, {'Item': 'Hot Coffee', 'Price': 70}],
+        'Beverages': [{'Item': 'Cold Coffee', 'Price': 84}, {'Item': 'Hot Coffee', 'Price': 21}, {'Item': 'Sperm Skake','Price': 690}, {'Item': 'Masala Tea','Price': 21}, {'Item': 'Ice Tea','Price': 63}, {'Item': 'Mint Mojito','Price': 84}, {'Item': 'Green Apple Soda','Price': 84}, {'Item': 'Blue Berry','Price': 84}, {'Item': 'Kiwi Punch','Price': 84}, {'Item': 'Mandrine','Price': 84}, {'Item': 'Watermelon Mojito','Price': 84}, {'Item': 'Seasonal Fruit Juice','Price': 84}, {'Item': 'Strawberry Shake','Price': 84}, {'Item': 'Black Current','Price': 84}, {'Item': 'Mango Shake','Price': 84}, {'Item': 'Rose Shake','Price': 84}, {'Item': 'Papaya Shake','Price': 84}, {'Item': 'Banana Shake','Price': 84}, {'Item': 'Kit-Kat Shake','Price': 84}, {'Item': 'Chocolate Shake','Price': 84}, {'Item': 'Oreo Shake','Price': 84}, {'Item': 'Custered Apple Shake','Price': 84}, {'Item': 'Sweet Lassi','Price': 84}, {'Item': 'Mango Lassi','Price': 84}, {'Item': 'Chocolate Lassi','Price': 84}, {'Item': 'Pineapple Juice','Price': 84}, {'Item': 'Apple Juice','Price': 84}, {'Item': 'Hot Chocolate','Price': 84}, {'Item': 'Lemon Ice Tea','Price': 84}]
         'Chinese': [{'Item': 'Veg Fried Rice', 'Price': 120}, {'Item': 'Chicken Fried Rice', 'Price': 150}],
         'North Indian': [{'Item': 'Chana Masala', 'Price': 100}, {'Item': 'Palak Paneer', 'Price': 120}],
         'Sweets': [{'Item': 'Gulab Jamun', 'Price': 80}, {'Item': 'Jalebi', 'Price': 90}],
