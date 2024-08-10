@@ -23,14 +23,16 @@ def view_menu(category):
     menu_df = pd.DataFrame(st.session_state.menu[category], columns=['Item', 'Price'])
     num_cols = 3
     num_rows_per_col = 10
-    cols = st.columns(num_cols)
-    for i, row in menu_df.iterrows():
-        col_idx = i % num_cols
-        row_idx = i // num_cols
-        if row_idx >= num_rows_per_col:
-            break
-        with cols[col_idx]:
-            st.write(f"{row['Item']} - ₹{row['Price']}")
+    with st.container():  # Add a container
+        st.write(f"**{category}**")  # Display the category name in bold
+        cols = st.columns(num_cols)
+        for i, row in menu_df.iterrows():
+            col_idx = i % num_cols
+            row_idx = i // num_cols
+            if row_idx >= num_rows_per_col:
+                break
+            with cols[col_idx]:
+                st.write(f"{row['Item']} - ₹{row['Price']}")
     
    
 # Function to add item to summary
