@@ -135,4 +135,4 @@ if st.button("Place Order"):
     order_summary = "Order Summary:\n"
     for item in st.session_state.cart:
         order_summary += f"{item['item']} - ₹{item['price']}\n"
-    pywhatkit.sendwhatmsg_instantly("+91xxxxxxxxxx", order_summary, 15, tab_close=True)
+    pywhatkit.sendwhatmsg_instantly("+918770564939", order_summary, 15, tab_close=True)
