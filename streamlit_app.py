@@ -123,4 +123,4 @@ if st.session_state.summary:
     if st.button("Place Order"):
         st.write("Order placed successfully!")
         st.session_state.summary = []  # Clear the summary after placing the
-        st.error("Order placed successfully! Your order is being processed.")  # Display an info message
+        st.success("Order placed successfully! Your order is being processed.")  # Display an info message
