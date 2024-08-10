@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import pywhatkit
+import request
 
 # Initialize data
 if 'menu' not in st.session_state:
