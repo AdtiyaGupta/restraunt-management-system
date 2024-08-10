@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import pywhatkit
 
 # Initialize data
 if 'menu' not in st.session_state:
@@ -123,3 +124,15 @@ if st.session_state.summary:
     if st.button("Place Order"):
         st.session_state.summary = []  # Clear the summary after placing the
         st.success("Order placed successfully! Your order is being processed.")  # Display an info message
+
+
+# Place order
+if st.button("Place Order"):
+    st.session_state.summary = []  # Clear the summary after placing the order
+    st.success("Order placed successfully!")  # Display a success message
+
+    # Send WhatsApp message with order summary
+    order_summary = "Order Summary:\n"
+    for item in st.session_state.cart:
+        order_summary += f"{item['item']} - ₹{item['price']}\n"
+    pywhatkit.sendwhatmsg_instantly("+91xxxxxxxxxx", order_summary, 15, tab_close=True)
