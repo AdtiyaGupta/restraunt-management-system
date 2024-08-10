@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import random
 
 # Initialize data
 if 'menu' not in st.session_state:
