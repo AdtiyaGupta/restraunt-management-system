@@ -16,13 +16,7 @@ if 'menu' not in st.session_state:
 if 'summary' not in st.session_state:
     st.session_state.summary = []
 
-
-
-
 st.set_page_config(page_icon="✨", layout="wide")
-
-
-
 
 # Function to view menu
 def view_menu(category):
